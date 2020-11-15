@@ -1,5 +1,5 @@
 locals {
-  env                       ="${terraform.workspace}"
+  env                       = terraform.workspace
   region = {
     "dev"                   = "us-central1"
     "prod"                  = "us-central1"
@@ -22,9 +22,14 @@ locals {
     "dev"                   = true
     "prod"                  = false
   }
-  region_type               = "${lookup(local.region,local.env)}"
-  kubernetes_nodes_num      = "${lookup(local.kubernetes_nodes,local.env)}"
-  kubernetes_issue_client_certificate = "${lookup(local.kubernetes_client_certificate,local.env)}"
-  kubernetes_machine_type = "${lookup(local.kubernetes_machine,local.env)}"
-  kubernetes_preemptible_option = "${lookup(local.kubernetes_preemptible,local.env)}"
+  manifests_path   = {
+    "dev"                   = "./infrastructure/app/dev"
+    "prod"                  = "./infrastructure/app/prod"
+  }
+  manifest_path             = lookup(local.manifests_path,local.env)
+  region_type               = lookup(local.region,local.env)
+  kubernetes_nodes_num      = lookup(local.kubernetes_nodes,local.env)
+  kubernetes_issue_client_certificate = lookup(local.kubernetes_client_certificate,local.env)
+  kubernetes_machine_type = lookup(local.kubernetes_machine,local.env)
+  kubernetes_preemptible_option = lookup(local.kubernetes_preemptible,local.env)
 }

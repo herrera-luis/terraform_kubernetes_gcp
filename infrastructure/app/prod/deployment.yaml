@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-app
+  name: backend-app
+  namespace: prod
+spec:
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      containers:
+        - name: backend-app
+          image: registry.hub.docker.com/herreraluis/basic_example:0.0.3
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5000
+          readinessProbe:
+            httpGet:
+              port: 5000
+              path: /healthcheck
+            initialDelaySeconds: 50
+            failureThreshold: 10
+            periodSeconds: 10
+            successThreshold: 1 
+            timeoutSeconds: 50
+          livenessProbe:
+            httpGet:
+              port: 5000
+              path: /healthcheck
+            initialDelaySeconds: 50
+            failureThreshold: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 50
