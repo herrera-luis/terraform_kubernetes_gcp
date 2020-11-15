@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: registry.hub.docker.com/herreraluis/basic_example:0.0.3
+          image: registry.hub.docker.com/herreraluis/basic_example
           imagePullPolicy: Always
           ports:
             - name: http
