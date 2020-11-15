@@ -4,6 +4,12 @@ provider "google" {
   version             = "~> 3.47"
 }
 
+provider "google-beta" {
+  project             = var.project_id
+  region              = local.region_type
+  version             = "~> 3.47"
+}
+
 module "network" {
   source              = "./infrastructure/network"
   name                = local.network_name
@@ -34,3 +40,12 @@ module "gcloud_kubectl-wrapper" {
   kubectl_destroy_command = "kubectl delete -f ${local.manifest_path}"
 }
 
+module "pipeline" {
+  source                  = "./infrastructure/pipeline"
+  project_id              = var.project_id
+  region                  = local.region_type
+  cluster_name            = module.kubernetes.kubernetes_cluster_name
+  branch_name             = local.branch_name
+  repository_owner        = local.repository_owner
+  repository_name         = local.repository_name
+}
