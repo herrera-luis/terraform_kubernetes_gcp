@@ -19,6 +19,7 @@ module "network" {
 module "kubernetes" {
   source                            = "./infrastructure/kubernetes"
   name                              = local.kubernetes_name
+  namespace_id                      = local.env
   region                            = local.region_type
   gke_num_nodes                     = local.kubernetes_nodes_num
   gke_username                      = var.gke_username
@@ -43,6 +44,7 @@ module "gcloud_kubectl-wrapper" {
 module "pipeline" {
   source                  = "./infrastructure/pipeline"
   project_id              = var.project_id
+  environment_id          = local.env
   region                  = local.region_type
   cluster_name            = module.kubernetes.kubernetes_cluster_name
   branch_name             = local.branch_name

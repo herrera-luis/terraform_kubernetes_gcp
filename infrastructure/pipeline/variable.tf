@@ -28,3 +28,8 @@ variable "region" {
   description = "region of cluster"
   type        = string
 }
+
+variable "environment_id" {
+  description = "environment id"
+  type        = string
+}

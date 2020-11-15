@@ -27,8 +27,8 @@ steps:
       - -R
       - --image=gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
       - -o output/app-backend
+      - --namespace=${_NAMESPACE}
       - --location=${_REGION}
       - --cluster=${_CLUSTER}
-      - --namespace=${_NAMESPACE}
 
 timeout: 1200s

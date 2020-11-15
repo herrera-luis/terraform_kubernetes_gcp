@@ -44,3 +44,20 @@ resource "google_container_node_pool" "primary_nodes" {
     }
   }
 }
+
+
+provider "kubernetes" {
+  version = "~> 1.13.3"
+  host = "https://${google_container_cluster.primary.endpoint}"
+  username = google_container_cluster.primary.master_auth.0.username
+  password = google_container_cluster.primary.master_auth.0.password
+  client_certificate = base64decode(google_container_cluster.primary.master_auth.0.client_certificate)
+  client_key = base64decode(google_container_cluster.primary.master_auth.0.client_key)
+  cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+}
+
+resource "kubernetes_namespace" "namespace" {
+  metadata {
+    name = var.namespace_id
+  }
+}
