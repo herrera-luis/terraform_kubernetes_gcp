@@ -1,4 +1,3 @@
-
 resource "google_container_registry" "registry" {
   project                 = var.project_id
   location                = "US"
@@ -22,5 +21,5 @@ resource "google_cloudbuild_trigger" "trigger" {
     _CLUSTER                = var.cluster_name
     _REGION                 = var.region
   }
-  filename                  = "infrastructure/pipeline/${var.environment_id}"
+  filename                  = "infrastructure/pipeline/${var.environment_id}.yaml"
 }

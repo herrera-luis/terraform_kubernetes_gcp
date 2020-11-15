@@ -37,9 +37,7 @@ def home():
 
 @app.route("/healthcheck")
 def healthcheck():
-    return jsonify(
-        status="OK"
-    )
+    return "healthy\n"
 
 
 if __name__ == "__main__":
