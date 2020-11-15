@@ -31,7 +31,7 @@ def home():
         "feugiat sed nibh. Nam sit amet semper nisi, vitae hendrerit erat. Orci varius natoque penatibus " +
         "et magnis dis parturient montes, nascetur ridiculus mus. Duis ultricies lorem libero, vel " +
         "condimentum neque aliquam vel. Integer non odio nisi. Sed nec orci purus.",
-        version="0.0.3"
+        version="0.0.4"
     )
 
 
