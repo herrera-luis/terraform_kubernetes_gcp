@@ -3,6 +3,11 @@ variable "name" {
   type        = string
 }
 
+variable "namespace_id" {
+  description = "namespace_id"
+  type        = string
+}
+
 variable "region" {
   description = "region id"
   type        = string
