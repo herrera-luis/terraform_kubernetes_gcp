@@ -26,6 +26,9 @@ locals {
     "dev"                   = "./infrastructure/app/dev"
     "prod"                  = "./infrastructure/app/prod"
   }
+  branch_name               = "main"
+  repository_owner          = "herrera-luis"
+  repository_name           = "terraform_kubernetes_gcp"
   manifest_path             = lookup(local.manifests_path,local.env)
   region_type               = lookup(local.region,local.env)
   kubernetes_nodes_num      = lookup(local.kubernetes_nodes,local.env)

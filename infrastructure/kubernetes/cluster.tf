@@ -28,8 +28,13 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     oauth_scopes = [
+      "https://www.googleapis.com/auth/devstorage.read_write", 
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/service.management.readonly",
+      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/trace.append",
+      "https://www.googleapis.com/auth/compute",
     ]
 
     labels = {
@@ -42,5 +47,25 @@ resource "google_container_node_pool" "primary_nodes" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+  }
+}
+
+
+provider "kubernetes" {
+  version = "~> 1.13.3"
+  host = "https://${google_container_cluster.primary.endpoint}"
+  username = google_container_cluster.primary.master_auth.0.username
+  password = google_container_cluster.primary.master_auth.0.password
+  client_certificate = base64decode(google_container_cluster.primary.master_auth.0.client_certificate)
+  client_key = base64decode(google_container_cluster.primary.master_auth.0.client_key)
+  cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+}
+
+resource "kubernetes_namespace" "namespace" {
+  metadata {
+    name = var.namespace_id
+  }
+  timeouts {
+    delete = "20m"
   }
 }
