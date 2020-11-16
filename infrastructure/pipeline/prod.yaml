@@ -1,7 +1,15 @@
 steps:
 
   - name: gcr.io/cloud-builders/docker
+    id: pull-app-backend
+    args:
+      - pull
+      - gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
+
+  - name: gcr.io/cloud-builders/docker
     id: tag-app-backend
+    waitFor:
+      - pull-app-backend
     args:
       - tag
       - gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
@@ -20,5 +28,5 @@ steps:
       - --namespace=${_NAMESPACE}
       - --location=${_REGION}
       - --cluster=${_CLUSTER}
-      
+
 timeout: 1200s
