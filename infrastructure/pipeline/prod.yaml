@@ -15,8 +15,16 @@ steps:
       - gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
       - gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
 
+  - name: gcr.io/cloud-builders/docker
+    id: push-app-backend
+    waitFor:
+      - tag-app-backend
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
+
   - name: 'gcr.io/cloud-builders/gke-deploy'
-    id: deploy-app-backend
+    id: push-app-backend
     waitFor:
       - tag-app-backend
     args:
