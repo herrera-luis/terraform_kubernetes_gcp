@@ -34,12 +34,12 @@ module "kubernetes" {
 module "gcloud_kubectl-wrapper" {
   source                  = "terraform-google-modules/gcloud/google//modules/kubectl-wrapper"
   version                 = "2.0.2"
-  module_depends_on       = [module.kubernetes]
+  module_depends_on       = [module.kubernetes.namespace_id]
   project_id              = var.project_id
   cluster_name            = module.kubernetes.kubernetes_cluster_name
   cluster_location        = local.region_type
-  kubectl_create_command  = "kubectl apply -f ${local.manifest_path}"
-  kubectl_destroy_command = "kubectl delete -f ${local.manifest_path}"
+  kubectl_create_command  = "kubectl apply -f ${local.manifest_path} -n ${local.env}"
+  kubectl_destroy_command = "kubectl delete -f ${local.manifest_path} -n ${local.env}"
 }
 
 module "pipeline" {

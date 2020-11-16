@@ -4,7 +4,6 @@ metadata:
   labels:
     app: backend-app
   name: backend-app
-  namespace: dev
 spec:
   selector:
     matchLabels:

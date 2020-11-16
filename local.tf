@@ -22,14 +22,15 @@ locals {
     "dev"                   = true
     "prod"                  = false
   }
-  manifests_path   = {
-    "dev"                   = "./infrastructure/app/dev"
-    "prod"                  = "./infrastructure/app/prod"
+   branch_names    = {
+    "dev"                   = "main"
+    "prod"                  = "prod"
   }
-  branch_name               = "main"
+  
+  manifest_path             = "./infrastructure/app"
   repository_owner          = "herrera-luis"
   repository_name           = "terraform_kubernetes_gcp"
-  manifest_path             = lookup(local.manifests_path,local.env)
+  branch_name               = lookup(local.branch_names,local.env)
   region_type               = lookup(local.region,local.env)
   kubernetes_nodes_num      = lookup(local.kubernetes_nodes,local.env)
   kubernetes_issue_client_certificate = lookup(local.kubernetes_client_certificate,local.env)
