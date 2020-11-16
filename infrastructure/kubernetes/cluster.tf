@@ -28,8 +28,13 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     oauth_scopes = [
+      "https://www.googleapis.com/auth/devstorage.read_write", 
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/service.management.readonly",
+      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/trace.append",
+      "https://www.googleapis.com/auth/compute",
     ]
 
     labels = {
@@ -59,5 +64,8 @@ provider "kubernetes" {
 resource "kubernetes_namespace" "namespace" {
   metadata {
     name = var.namespace_id
+  }
+  timeouts {
+    delete = "20m"
   }
 }
