@@ -23,7 +23,7 @@ steps:
       - push-app-backend
     args:
       - run
-      - --filename=infrastructure/app/dev/
+      - --filename=infrastructure/app/
       - -R
       - --image=gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
       - -o output/app-backend

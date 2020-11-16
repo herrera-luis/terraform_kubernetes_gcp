@@ -29,7 +29,7 @@ steps:
       - push-app-backend
     args:
       - run
-      - --filename=infrastructure/app/prod/
+      - --filename=infrastructure/app/
       - --image=gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
       - -R
       - -o output/app-backend
