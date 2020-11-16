@@ -24,3 +24,8 @@ output "client_key" {
   sensitive   = true
   value       = base64encode(google_container_cluster.primary.master_auth[0].client_key)
 }
+
+output "namespace_id" {
+  description = "the namespace_id"
+  value       = kubernetes_namespace.namespace.metadata[0].name
+}
