@@ -24,9 +24,9 @@ steps:
       - gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
 
   - name: 'gcr.io/cloud-builders/gke-deploy'
-    id: push-app-backend
+    id: deploy-app-backend
     waitFor:
-      - tag-app-backend
+      - push-app-backend
     args:
       - run
       - --filename=infrastructure/app/prod/
