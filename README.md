@@ -26,13 +26,13 @@ $ gcloud auth application-default login
 
 ### Enable GCP APIs
 
-If this is your first time running terraform with GCP you need to enable next APIs.
+If this is your first time running terraform with GCP you need to enable the following APIs.
 
 * containerregistry.googleapis.com
 * container.googleapis.com
 * cloudbuild.googleapis.com
 
-You can do it on your terminal with next command:
+You can do it on your terminal with the following command:
 
 ```shell
 $ gcloud services enable containerregistry.googleapis.com
@@ -43,7 +43,7 @@ $ gcloud services enable containerregistry.googleapis.com
 
 ### Step 1
 
-Before run the scripts you need to create terraform workspaces:
+First, create terraform workspaces:
 
 * dev
 * prod
@@ -56,7 +56,7 @@ $ terraform workspace new dev
 
 ### Step 2
 
-Then you need set the environment value of your gcp proyect id
+Then you need to set the environment value of your gcp project id
 
 ```shell
 $ export TF_VAR_gcp_project_id=devops-lab-583419
@@ -81,4 +81,18 @@ $ terraform plan
 ```shell
 $ terraform apply
 ```
+
+
+### Changes that you need to make to use this repository
+
+In order to use this repository with your personal GCP account and repository you need to change the values on
+
+**infrastructure/app/deployment.yaml**
+
+* image
+
+**local.tf**
+
+* repository_owner
+* repository_name
 
