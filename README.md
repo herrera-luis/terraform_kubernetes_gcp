@@ -92,7 +92,13 @@ $ terraform apply
 
 ### Changes that you need to make to use this repository
 
-In order to use this repository with your personal GCP account and repository you need to change the values on
+In order to use this repository with your personal GCP account and repository you need to change the values on:
+
+**infrastructure/kubernetes/variable.tf**  (Optional, these properties have a default value for demo purposes)
+
+* gke_username
+* gke_password
+
 
 **infrastructure/app/deployment.yaml**
 

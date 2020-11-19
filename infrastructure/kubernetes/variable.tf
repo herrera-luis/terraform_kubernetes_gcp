@@ -18,6 +18,18 @@ variable "project_id" {
   type        = string
 }
 
+variable "gke_username" {
+  description = "gke username"
+  default = "change-me"
+  type        = string
+}
+
+variable "gke_password" {
+  description = "gke password"
+  default = "password-change-me"
+  type        = string
+}
+
 variable "issue_client_certificate" {
   description = "issue client certificate"
   type        = bool
