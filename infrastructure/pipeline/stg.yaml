@@ -1,0 +1,40 @@
+steps:
+
+  - name: gcr.io/cloud-builders/docker
+    id: pull-app-backend
+    args:
+      - pull
+      - gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
+
+  - name: gcr.io/cloud-builders/docker
+    id: tag-app-backend
+    waitFor:
+      - pull-app-backend
+    args:
+      - tag
+      - gcr.io/$PROJECT_ID/app-backend:$SHORT_SHA
+      - gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
+
+  - name: gcr.io/cloud-builders/docker
+    id: push-app-backend
+    waitFor:
+      - tag-app-backend
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
+
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    id: deploy-app-backend
+    waitFor:
+      - push-app-backend
+    args:
+      - run
+      - --filename=infrastructure/app/
+      - --image=gcr.io/$PROJECT_ID/app-backend:$TAG_NAME
+      - -R
+      - -o output/app-backend
+      - --namespace=${_NAMESPACE}
+      - --location=${_REGION}
+      - --cluster=${_CLUSTER}
+
+timeout: 1200s

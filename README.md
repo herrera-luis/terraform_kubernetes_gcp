@@ -46,13 +46,14 @@ $ gcloud services enable containerregistry.googleapis.com
 First, create terraform workspaces:
 
 * dev
+* stg
 * prod
 
 ```shell
 $ terraform workspace new dev
 ```
 
-**NOTE:** To make this example easier, only dev and prod environments are implemented through the use of `terraform workspace`. You can extend this behavior to implement it in more environments and create projects under an organization hierarchy if necessary and putting the values on `local.tf` file.
+**NOTE:** To make this example easier, only dev, stg and prod environments are implemented through the use of `terraform workspace`. You can extend this behavior to implement it in more environments and create projects under an organization hierarchy if it's necessary.
 
 ### Step 2
 
