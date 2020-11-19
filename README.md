@@ -38,6 +38,12 @@ You can do it on your terminal with the following command:
 $ gcloud services enable containerregistry.googleapis.com
 ```
 
+### Connect with your Github/Bitbucket repository
+
+Before create the pipelines (triggers on GCP) you need to connect your repository to your project.
+
+* [Connect Repository](https://console.cloud.google.com/cloud-build/triggers/connect)
+
 
 ## Local Environment setup
 
