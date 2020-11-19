@@ -15,7 +15,7 @@ locals {
   kubernetes_nodes          = {
     "dev"                   = "1"
     "stg"                   = "1"
-    "prod"                  = "2"
+    "prod"                  = "1"
   }
   kubernetes_client_certificate        = {
     "dev"                   = false

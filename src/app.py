@@ -20,9 +20,6 @@ def home():
         username="The user " + str(user_number),
         email="lorem.ipsum+" + str(user_number) + "@email.com",
         date=datetime.now(),
-        telephone="+999 " + str(random.randint(101, 800)) +
-        " " + str(random.randint(101, 800)) + " " +
-        str(random.randint(101, 800)),
         x_request_id=uuid.uuid1(),
         biography="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac leo " +  
         "vehicula, tempus felis quis, sollicitudin felis. Donec vel erat mauris. Nulla facilisi. " + 
@@ -31,7 +28,7 @@ def home():
         "feugiat sed nibh. Nam sit amet semper nisi, vitae hendrerit erat. Orci varius natoque penatibus " +
         "et magnis dis parturient montes, nascetur ridiculus mus. Duis ultricies lorem libero, vel " +
         "condimentum neque aliquam vel. Integer non odio nisi. Sed nec orci purus.",
-        version="0.0.4"
+        version="0.0.5"
     )
 
 
