@@ -1,10 +1,49 @@
-# Terraform with Kubernetes multienvironment support
+# Terraform with Kubernetes on GCP
 
-This repository have a basic setup to support multienv with terraform in order to provisione kubernetes cluster
+This repository has an example of terraform setup with the following features:
 
-## Environment setup
+* Workspace support (dev/prod)
+* Modules: app (k8s metadata), kubernetes, network and pipeline 
+* Basic app on python
 
-Before run the scripts you need to create the terraform workspaces:
+After you deploy this infrastructure you will have a public ip that provides access to the basic app deployed on GKE and a pipeline configuration that will update the app every time that you do a push on the main branch.
+
+## GCP setup
+
+### Install and configure GCloud
+
+First, install the [Google Cloud CLI](https://cloud.google.com/sdk/docs/quickstarts)  and initialize it.
+
+```shell
+$ gcloud init
+```
+
+Once you've initialized gcloud (signed in, selected project), add your account  to the Application Default Credentials (ADC). This will allow Terraform to access these credentials to provision resources on GCloud.
+
+```shell
+$ gcloud auth application-default login
+```
+
+### Enable GCP APIs
+
+If this is your first time running terraform with GCP you need to enable next APIs.
+
+* containerregistry.googleapis.com
+* container.googleapis.com
+* cloudbuild.googleapis.com
+
+You can do it on your terminal with next command:
+
+```shell
+$ gcloud services enable containerregistry.googleapis.com
+```
+
+
+## Local Environment setup
+
+### Step 1
+
+Before run the scripts you need to create terraform workspaces:
 
 * dev
 * prod
@@ -13,30 +52,33 @@ Before run the scripts you need to create the terraform workspaces:
 $ terraform workspace new dev
 ```
 
-Then you need set values to the next environment variables on the `.env` file:
+**NOTE:** To make this example easier, only dev and prod environments are implemented through the use of `terraform workspace`. You can extend this behavior to implement it in more environments and create projects under an organization hierarchy if necessary and putting the values on `local.tf` file.
 
-* TF_VAR_gke_username=the-gke-username
-* TF_VAR_gke_password=the-gke-password
-* TF_VAR_project_id=the-project-id
+### Step 2
 
-```shell
-$ export TF_VAR_gke_username=admin
-```
-You can specify this on the .env file or as a prefix to the command.
-
-## Install and configure GCloud
-
-First, install the [Google Cloud CLI](https://cloud.google.com/sdk/docs/quickstarts) 
-and initialize it.
+Then you need set the environment value of your gcp proyect id
 
 ```shell
-$ gcloud init
+$ export TF_VAR_gcp_project_id=devops-lab-583419
 ```
 
-Once you've initialized gcloud (signed in, selected project), add your account 
-to the Application Default Credentials (ADC). This will allow Terraform to access
-these credentials to provision resources on GCloud.
+### Step 3
+
+Init your terraform workspace
 
 ```shell
-$ gcloud auth application-default login
+$ terraform init
 ```
+
+### Step 4
+
+Now you can terraform plan and apply commands to deploy your infrastructure to GCP
+
+```shell
+$ terraform plan
+```
+
+```shell
+$ terraform apply
+```
+

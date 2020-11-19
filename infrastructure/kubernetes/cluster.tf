@@ -1,4 +1,4 @@
-# GKE cluster
+
 resource "google_container_cluster" "primary" {
   name     = var.name
   location = var.region
@@ -10,16 +10,13 @@ resource "google_container_cluster" "primary" {
   subnetwork = var.google_compute_subnetwork_subnet.name
 
   master_auth {
-    username = var.gke_username
-    password = var.gke_password
-
     client_certificate_config {
       issue_client_certificate = var.issue_client_certificate
     }
   }
 }
 
-# Separately Managed Node Pool
+
 resource "google_container_node_pool" "primary_nodes" {
   name       = "${google_container_cluster.primary.name}-node-pool"
   location   = var.region
@@ -59,8 +56,13 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_namespace" "namespace" {
-  depends_on = [google_container_node_pool.primary_node]
+  depends_on = [google_container_node_pool.primary_nodes]
   metadata {
     name = var.namespace_id
   }
+}
+
+resource "google_container_registry" "registry" {
+  project                 = var.project_id
+  location                = "US"
 }

@@ -1,9 +1,3 @@
-resource "google_container_registry" "registry" {
-  project                 = var.project_id
-  location                = "US"
-}
-
-
 resource "google_cloudbuild_trigger" "trigger" {
   project                   = var.project_id
   provider                  = google-beta
