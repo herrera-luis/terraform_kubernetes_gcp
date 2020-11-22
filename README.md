@@ -109,3 +109,11 @@ In order to use this repository with your personal GCP account and repository yo
 * repository_owner
 * repository_name
 
+
+## Todo
+
+* Automatize triggers with conditions to be initiated when a new release is generated (manual workaround, edit trigger: [Example](https://github.com/herrera-luis/terraform_kubernetes_gcp/tree/main/image))
+
+* Add tests to the demo app and a new step on the dev pipeline to run it.
+
+* Add resources for observability
